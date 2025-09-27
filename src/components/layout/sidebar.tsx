@@ -35,9 +35,6 @@ export function Sidebar({ className }: SidebarProps) {
           <div className="w-8 h-8 bg-[var(--primary)] rounded-full flex items-center justify-center">
             <Leaf className="w-5 h-5 text-[var(--primary-foreground)]" />
           </div>
-          <span className="font-bold text-lg text-[var(--foreground)]">
-            hana.eco
-          </span>
         </div>
       </div>
       <nav className="p-4">
