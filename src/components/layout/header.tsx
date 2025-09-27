@@ -26,9 +26,9 @@ export function Header({ title, description, className }: HeaderProps) {
             <option value="2024-02">2024년 2월</option>
             <option value="2024-03">2024년 3월</option>
           </Select>
-          <Button>
-            <Download className="w-4 h-4 mr-2" />
-            보고서 다운로드
+          <Button className="h-auto px-4 py-2 whitespace-nowrap">
+            <Download className="w-5 h-5 mr-2" />
+            다운로드
           </Button>
         </div>
       </div>

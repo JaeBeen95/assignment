@@ -1,16 +1,29 @@
 @import 'tailwindcss';
 
+/* ==========================================================================
+  디자인 시스템의 "진실의 원천" (Single Source of Truth)
+  ==========================================================================
+  이 파일 하나로 프로젝트의 모든 디자인 토큰(색상, 그림자, 폰트 등)을 중앙 관리합니다.
+  컴포넌트에서는 아래 정의된 CSS 변수를 Tailwind의 임의 값(arbitrary value) 문법으로 사용합니다.
+  예시: className="bg-[var(--primary)]"
+*/
+
 :root {
   /* 그림자 및 둥근 모서리 */
+  /* 사용법: className="shadow-[var(--shadow-card)]" */
   --shadow-card:
     0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02);
+  /* 사용법: className="rounded-[var(--radius-card)]" */
   --radius-card: 8px;
 
-  /* 기본 색상 */
+  /* 기본 배경 및 텍스트 색상 */
+  /* 사용법: className="bg-[var(--background)]" */
   --background: oklch(0.99 0.005 240);
+  /* 사용법: className="text-[var(--foreground)]" */
   --foreground: oklch(0.1 0.02 240);
 
-  /* 컴포넌트 색상 */
+  /* 컴포넌트 상태별 색상 */
+  /* 사용법: className="bg-[var(--card)]" */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.1 0.02 240);
   --popover: oklch(1 0 0);
@@ -19,32 +32,42 @@
   --input: oklch(0.92 0.01 240);
   --ring: oklch(0.45 0.22 259.75);
 
-  /* 시맨틱 색상 */
-  --primary: oklch(0.55 0.22 259.75);
-  --primary-foreground: oklch(0.99 0.005 240);
+  /* 시맨틱 색상 (의미 중심 색상) */
+  /* 사용법: className="bg-[var(--primary)]" */
+  --primary: oklch(0.55 0.22 259.75); /* 원본: #1677ff */
+  --primary-foreground: oklch(
+    0.99 0.005 240
+  ); /* Primary 색상 위의 텍스트 색상 */
   --secondary: oklch(0.96 0.01 240);
   --secondary-foreground: oklch(0.2 0.02 240);
 
-  /* 상태 색상 */
-  --destructive: oklch(0.58 0.24 27.2);
-  --success: oklch(0.7 0.21 133.6);
-  --warning: oklch(0.75 0.2 84.4);
+  /* 상태 색상 (성공, 경고, 위험 등) */
+  /* 사용법: className="bg-[var(--destructive)]" */
+  --destructive: oklch(0.58 0.24 27.2); /* #f5222d */
+  --success: oklch(0.7 0.21 133.6); /* #52c41a */
+  --warning: oklch(0.75 0.2 84.4); /* #fa8c16 */
 
-  /* 차트 색상 */
-  --chart-1: oklch(0.55 0.22 259.75);
-  --chart-2: oklch(0.65 0.2 259.75);
-  --chart-3: oklch(0.75 0.18 259.75);
-  --chart-4: oklch(0.72 0.15 184.7);
-  --chart-5: oklch(0.7 0.21 133.6);
+  /* 차트 전용 색상 */
+  /* 사용법: style={{ backgroundColor: 'var(--chart-1)' }} */
+  --chart-1: oklch(0.55 0.22 259.75); /* primary */
+  --chart-2: oklch(0.65 0.2 259.75); /* secondary */
+  --chart-3: oklch(0.75 0.18 259.75); /* tertiary */
+  --chart-4: oklch(0.72 0.15 184.7); /* info (cyan) */
+  --chart-5: oklch(0.7 0.21 133.6); /* success (green) */
 }
 
+/* ==========================================================================
+  기본 스타일 및 레이어 설정
+  ========================================================================== */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    /* 모든 요소에 기본 테두리 색상과 포커스 링 스타일을 적용합니다. */
+    @apply border-[var(--border)] outline-[var(--ring)]/50;
   }
 
   body {
-    @apply bg-background text-foreground;
+    /* body에 기본 배경, 텍스트 색상, 폰트를 적용합니다. */
+    @apply bg-[var(--background)] text-[var(--foreground)];
     font-family:
       'Inter',
       -apple-system,
