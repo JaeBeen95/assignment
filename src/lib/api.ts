@@ -1,6 +1,5 @@
 import type { Company, Post, Country } from '@/types';
 
-// 샘플 데이터
 const countries: Country[] = [
   { code: 'US', name: 'United States' },
   { code: 'DE', name: 'Germany' },
