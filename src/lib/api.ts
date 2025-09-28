@@ -51,17 +51,14 @@ const posts: Post[] = [
   },
 ];
 
-// 내부 상태 (메모리에서 관리)
 let _countries = [...countries];
 let _companies = [...companies];
 let _posts = [...posts];
 
-// 유틸리티 함수들
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 const jitter = () => 200 + Math.random() * 600;
 const maybeFail = () => Math.random() < 0.15;
 
-// API 함수들
 export async function fetchCountries(): Promise<Country[]> {
   await delay(jitter());
   return _countries;

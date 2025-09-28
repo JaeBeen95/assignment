@@ -4,40 +4,19 @@ import { Header } from '@/components/layout/header';
 import { KPICardsSection } from '@/components/dashboard/KPICardsSection';
 import { ChartsSection } from '@/components/dashboard/ChartsSection';
 import { EmissionDetailsTable } from '@/components/dashboard/EmissionDetailsTable';
-import { useCompanies } from '@/hooks/useCompanies';
+import { useCompanyDashboard } from '@/hooks/useCompany';
 
 export default function Dashboard() {
-  const { data: companies, isPending, error } = useCompanies();
+  const companyName = 'Acme Corp';
+
+  const { data, isPending, error } = useCompanyDashboard(companyName);
 
   if (isPending) return <div>로딩 중...</div>;
   if (error) return <div>오류가 발생했습니다: {error.message}</div>;
+  if (!data) return <div>회사 데이터를 찾을 수 없습니다.</div>;
 
-  const acmeData = companies?.find((c) => c.name === 'Acme Corp');
-  const companyName = 'Acme Corp';
-
-  const kpiData = {
-    totalEmissions: '462 tCO2',
-    currentMonth: '137 tCO2',
-    monthlyTrend: '-14.4% vs 전월',
-    targetAchievement: '68.4%',
-    mainSource: '전기',
-    sourcePercentage: '70.3% 비중',
-  };
-
-  const emissionBySource = {
-    labels: ['전기', '휘발유'],
-    values: [325, 137],
-  };
-
-  const monthlyTrend = {
-    labels: ['1월', '2월', '3월'],
-    datasets: [
-      {
-        label: 'Acme Corp 총 배출량',
-        data: [165, 160, 137],
-      },
-    ],
-  };
+  const { company, kpiData, emissionBySource, monthlyTrend, totalEmissions } =
+    data;
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -53,9 +32,9 @@ export default function Dashboard() {
           companyName={companyName}
         />
         <EmissionDetailsTable
-          emissions={acmeData?.emissions || []}
+          emissions={company.emissions}
           companyName={companyName}
-          totalEmissions={462}
+          totalEmissions={totalEmissions}
         />
       </div>
     </div>
