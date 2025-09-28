@@ -5,11 +5,11 @@ import { KPICardsSection } from '@/components/dashboard/KPICardsSection';
 import { ChartsSection } from '@/components/dashboard/ChartsSection';
 import { EmissionDetailsTable } from '@/components/dashboard/EmissionDetailsTable';
 import { useCompanyDashboard } from '@/hooks/useCompany';
+import { useCompanyContext } from '@/providers/companyProvider';
 
 export default function Dashboard() {
-  const companyName = 'Acme Corp';
-
-  const { data, isPending, error } = useCompanyDashboard(companyName);
+  const { selectedCompanyName } = useCompanyContext();
+  const { data, isPending, error } = useCompanyDashboard(selectedCompanyName);
 
   if (isPending) return <div>로딩 중...</div>;
   if (error) return <div>오류가 발생했습니다: {error.message}</div>;
@@ -22,18 +22,18 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[var(--background)]">
       <div className="container mx-auto p-6 space-y-6">
         <Header
-          title="Acme Corp 탄소 배출량 대시보드"
-          description="Acme Corp의 실시간 탄소 배출량 현황과 분석을 확인하세요"
+          title={`${selectedCompanyName} 탄소 배출량 대시보드`}
+          description={`${selectedCompanyName}의 실시간 탄소 배출량 현황과 분석을 확인하세요`}
         />
         <KPICardsSection data={kpiData} />
         <ChartsSection
           emissionBySource={emissionBySource}
           monthlyTrend={monthlyTrend}
-          companyName={companyName}
+          companyName={selectedCompanyName}
         />
         <EmissionDetailsTable
           emissions={company.emissions}
-          companyName={companyName}
+          companyName={selectedCompanyName}
           totalEmissions={totalEmissions}
         />
       </div>

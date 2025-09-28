@@ -2,22 +2,19 @@ import { Download, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/select';
 import { Icon } from '@/components/ui/icon';
+import { useCompanies } from '@/hooks/useCompany';
+import { useCompanyContext } from '@/providers/companyProvider';
 
 type HeaderProps = {
   title: string;
   description?: string;
   className?: string;
-  selectedCompany?: string;
-  onCompanyChange?: (companyId: string) => void;
 };
 
-export function Header({
-  title,
-  description,
-  className,
-  selectedCompany = 'acme',
-  onCompanyChange,
-}: HeaderProps) {
+export function Header({ title, description, className }: HeaderProps) {
+  const { data: companies } = useCompanies();
+  const { selectedCompanyName, setSelectedCompanyName } = useCompanyContext();
+
   return (
     <header className={className}>
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -37,12 +34,15 @@ export function Header({
               className="w-4 h-4 text-[var(--foreground)]/60"
             />
             <Select
-              value={selectedCompany}
-              onChange={(e) => onCompanyChange?.(e.target.value)}
+              value={selectedCompanyName}
+              onChange={(e) => setSelectedCompanyName(e.target.value)}
               className="w-32"
             >
-              <option value="acme">Acme Corp</option>
-              <option value="globex">Globex</option>
+              {companies?.map((company) => (
+                <option key={company.id} value={company.name}>
+                  {company.name}
+                </option>
+              ))}
             </Select>
           </div>
         </div>
