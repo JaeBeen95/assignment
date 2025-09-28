@@ -20,8 +20,8 @@ export function KPICardsSection({ data }: KPICardsProps) {
       <KPICard
         title="총 배출량 (Q1)"
         value={data.totalEmissions}
-        subtitle="1분기 누적"
         icon={Leaf}
+        subtitle="1분기 누적"
       />
 
       <KPICard
@@ -48,8 +48,8 @@ export function KPICardsSection({ data }: KPICardsProps) {
       <KPICard
         title="주요 배출원"
         value={data.mainSource}
-        subtitle={data.sourcePercentage}
         icon={Zap}
+        subtitle={data.sourcePercentage}
       />
     </section>
   );

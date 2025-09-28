@@ -1,12 +1,13 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Icon } from '@/components/ui/icon';
 import { LucideIcon } from 'lucide-react';
 
 type KPICardProps = {
   title: string;
   value: string;
-  subtitle?: string;
   icon: LucideIcon;
+  subtitle?: string;
   trend?: {
     icon: LucideIcon;
     value: string;
@@ -21,8 +22,8 @@ type KPICardProps = {
 export function KPICard({
   title,
   value,
+  icon,
   subtitle,
-  icon: Icon,
   trend,
   badge,
 }: KPICardProps) {
@@ -32,14 +33,17 @@ export function KPICard({
         <CardTitle className="text-sm font-medium text-[var(--foreground)]/60">
           {title}
         </CardTitle>
-        <Icon className="h-4 w-4 text-[var(--foreground)]/60" />
+        <Icon icon={icon} className="h-4 w-4 text-[var(--foreground)]/60" />
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
         <div className="flex items-center space-x-2 text-xs text-[var(--foreground)]/60">
           {trend && (
             <>
-              <trend.icon className={`h-4 w-4 text-[var(--${trend.color})]`} />
+              <Icon
+                icon={trend.icon}
+                className={`h-4 w-4 text-[var(--${trend.color})]`}
+              />
               <span className={`text-[var(--${trend.color})]`}>
                 {trend.value}
               </span>

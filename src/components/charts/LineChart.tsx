@@ -101,13 +101,7 @@ export function LineChart({
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
-        position: 'bottom',
-        align: 'start',
-        labels: {
-          usePointStyle: true,
-          boxWidth: 8,
-        },
+        display: false,
       },
       tooltip: {
         mode: 'index',
@@ -137,7 +131,7 @@ export function LineChart({
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="mt-6">
         <div className="h-64">
           <Line data={chartData} options={options} />
         </div>

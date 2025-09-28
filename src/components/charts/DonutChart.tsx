@@ -78,7 +78,7 @@ export function DonutChart({
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="mt-6">
         <div className="relative h-64">
           <Doughnut data={chartData} options={options} />
         </div>

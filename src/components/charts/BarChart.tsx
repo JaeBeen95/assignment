@@ -96,7 +96,7 @@ export function BarChart({
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="mt-6">
         <div className="h-64">
           <Bar data={chartData} options={options} />
         </div>

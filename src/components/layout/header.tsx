@@ -1,6 +1,7 @@
 import { Download, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/select';
+import { Icon } from '@/components/ui/icon';
 
 type HeaderProps = {
   title: string;
@@ -30,9 +31,11 @@ export function Header({
             )}
           </div>
 
-          {/* 회사 뷰 컨트롤러 - 로그인 시뮬레이션 */}
           <div className="flex items-center gap-2 pl-4 border-l border-[var(--border)]">
-            <Building2 className="w-4 h-4 text-[var(--foreground)]/60" />
+            <Icon
+              icon={Building2}
+              className="w-4 h-4 text-[var(--foreground)]/60"
+            />
             <Select
               value={selectedCompany}
               onChange={(e) => onCompanyChange?.(e.target.value)}
@@ -51,7 +54,7 @@ export function Header({
             <option value="2024-03">2024년 3월</option>
           </Select>
           <Button className="h-auto px-4 py-2 whitespace-nowrap">
-            <Download className="w-5 h-5 mr-2" />
+            <Icon icon={Download} className="w-5 h-5 mr-2" />
             다운로드
           </Button>
         </div>
