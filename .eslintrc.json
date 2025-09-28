@@ -4,6 +4,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["jest.config.js", "jest.setup.js"],
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
