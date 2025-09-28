@@ -4,6 +4,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { fetchCompanies } from '@/lib/api';
 import Dashboard from '@/components/dashboard/Dashboard';
 import { DashboardLoading } from '@/components/ui/loading';
+import { ErrorBoundary } from '@/components/ui/errorBoundary';
 
 export default async function Home() {
   const queryClient = getQueryClient();
@@ -15,9 +16,11 @@ export default async function Home() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<DashboardLoading />}>
-        <Dashboard />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<DashboardLoading />}>
+          <Dashboard />
+        </Suspense>
+      </ErrorBoundary>
     </HydrationBoundary>
   );
 }
