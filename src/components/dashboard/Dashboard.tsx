@@ -9,11 +9,7 @@ import { useCompanyContext } from '@/providers/companyProvider';
 
 export default function Dashboard() {
   const { selectedCompanyName } = useCompanyContext();
-  const { data, isPending, error } = useCompanyDashboard(selectedCompanyName);
-
-  if (isPending) return <div>로딩 중...</div>;
-  if (error) return <div>오류가 발생했습니다: {error.message}</div>;
-  if (!data) return <div>회사 데이터를 찾을 수 없습니다.</div>;
+  const { data } = useCompanyDashboard(selectedCompanyName);
 
   const { company, kpiData, emissionBySource, monthlyTrend, totalEmissions } =
     data;

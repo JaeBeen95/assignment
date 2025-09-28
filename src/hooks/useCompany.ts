@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { fetchCompanies } from '@/lib/api';
 import {
   calculateKPIs,
@@ -14,12 +14,13 @@ export function useCompanies() {
 }
 
 export function useCompanyDashboard(companyName: string) {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['companies'],
     queryFn: fetchCompanies,
     select: (companies) => {
       const company = companies.find((c) => c.name === companyName);
-      if (!company) return null;
+      if (!company)
+        throw new Error(`회사 '${companyName}'를 찾을 수 없습니다.`);
 
       return {
         company,
