@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Sidebar } from '@/components/layout/sidebar';
+import QueryProvider from '@/providers/queryProvider';
 
 export const metadata: Metadata = {
   title: 'HanaLoop Carbon Emissions Dashboard',
@@ -16,8 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-        <Sidebar />
-        <main className="flex-1 flex flex-col overflow-y-auto">{children}</main>
+        <QueryProvider>
+          <Sidebar />
+          <main className="flex-1 flex flex-col overflow-y-auto">
+            {children}
+          </main>
+        </QueryProvider>
       </body>
     </html>
   );
