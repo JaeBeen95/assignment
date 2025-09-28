@@ -1,4 +1,4 @@
-import { Download } from 'lucide-react';
+import { Download, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/select';
 
@@ -6,20 +6,44 @@ type HeaderProps = {
   title: string;
   description?: string;
   className?: string;
+  selectedCompany?: string;
+  onCompanyChange?: (companyId: string) => void;
 };
 
-export function Header({ title, description, className }: HeaderProps) {
+export function Header({
+  title,
+  description,
+  className,
+  selectedCompany = 'acme',
+  onCompanyChange,
+}: HeaderProps) {
   return (
     <header className={className}>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-[var(--foreground)]">
-            {title}
-          </h1>
-          {description && (
-            <p className="text-[var(--foreground)]/60 mt-1">{description}</p>
-          )}
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-[var(--foreground)]">
+              {title}
+            </h1>
+            {description && (
+              <p className="text-[var(--foreground)]/60 mt-1">{description}</p>
+            )}
+          </div>
+
+          {/* 회사 뷰 컨트롤러 - 로그인 시뮬레이션 */}
+          <div className="flex items-center gap-2 pl-4 border-l border-[var(--border)]">
+            <Building2 className="w-4 h-4 text-[var(--foreground)]/60" />
+            <Select
+              value={selectedCompany}
+              onChange={(e) => onCompanyChange?.(e.target.value)}
+              className="w-32"
+            >
+              <option value="acme">Acme Corp</option>
+              <option value="globex">Globex</option>
+            </Select>
+          </div>
         </div>
+
         <div className="flex items-center gap-3">
           <Select defaultValue="2024-q1">
             <option value="2024-q1">2024년 1분기</option>
