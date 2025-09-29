@@ -2,6 +2,7 @@
 
 import { Home, FileText, Globe, Leaf } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Icon } from '@/components/ui/icon';
 
@@ -34,7 +35,7 @@ export function Sidebar() {
             const isActive = pathname === item.href;
             return (
               <li key={item.name}>
-                <a
+                <Link
                   href={item.href}
                   className={cn(
                     'flex items-center gap-3 px-3 py-2 rounded-lg transition-colors',
@@ -45,7 +46,7 @@ export function Sidebar() {
                 >
                   <Icon icon={item.icon} className="w-5 h-5" />
                   <span>{item.name}</span>
-                </a>
+                </Link>
               </li>
             );
           })}
