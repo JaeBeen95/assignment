@@ -13,6 +13,20 @@ export function useCompanies() {
   });
 }
 
+export function useCompanyNameMap() {
+  return useQuery({
+    queryKey: ['companies'],
+    queryFn: fetchCompanies,
+    select: (companies) => {
+      const map = new Map<string, string>();
+      companies.forEach((company) => {
+        map.set(company.id, company.name);
+      });
+      return map;
+    },
+  });
+}
+
 export function useCompanyDashboard(companyName: string) {
   return useSuspenseQuery({
     queryKey: ['companies'],

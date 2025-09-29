@@ -2,21 +2,13 @@
 
 import { Header } from '@/components/layout/header';
 import { Card } from '@/components/ui/card';
-import { usePosts } from '@/hooks/useCompany';
-import { useCompanies } from '@/hooks/useCompany';
+import { usePosts, useCompanyNameMap } from '@/hooks/useCompany';
 import { FileText, Calendar, Building2 } from 'lucide-react';
 import { Icon } from '@/components/ui/icon';
 
 export default function ReportsContent() {
   const { data: posts } = usePosts();
-  const { data: companies } = useCompanies();
-
-  const getCompanyName = (resourceUid: string) => {
-    return (
-      companies?.find((company) => company.id === resourceUid)?.name ||
-      '알 수 없는 회사'
-    );
-  };
+  const { data: companyNameMap } = useCompanyNameMap();
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -48,7 +40,10 @@ export default function ReportsContent() {
                   <div className="flex items-center gap-4 text-sm text-[var(--foreground)]/60">
                     <div className="flex items-center gap-2">
                       <Icon icon={Building2} className="w-4 h-4" />
-                      <span>{getCompanyName(post.resourceUid)}</span>
+                      <span>
+                        {companyNameMap?.get(post.resourceUid) ||
+                          '알 수 없는 회사'}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Icon icon={Calendar} className="w-4 h-4" />

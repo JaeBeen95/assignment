@@ -20,6 +20,8 @@ export default function Dashboard() {
         <Header
           title={`${selectedCompanyName} 탄소 배출량 대시보드`}
           description={`${selectedCompanyName}의 실시간 탄소 배출량 현황과 분석을 확인하세요`}
+          showCompanySelector={true}
+          showActions={true}
         />
         <KPICardsSection data={kpiData} />
         <ChartsSection
