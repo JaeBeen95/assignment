@@ -1,5 +1,5 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import { fetchCompanies } from '@/lib/api';
+import { fetchCompanies, fetchCountries, fetchPosts } from '@/lib/api';
 import {
   calculateKPIs,
   calculateEmissionBySource,
@@ -33,5 +33,19 @@ export function useCompanyDashboard(companyName: string) {
         ),
       };
     },
+  });
+}
+
+export function useCountries() {
+  return useSuspenseQuery({
+    queryKey: ['countries'],
+    queryFn: fetchCountries,
+  });
+}
+
+export function usePosts() {
+  return useSuspenseQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
   });
 }
