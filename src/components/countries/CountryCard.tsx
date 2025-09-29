@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Globe, Building2, BarChart3 } from 'lucide-react';
 import { Icon } from '@/components/ui/icon';
 import { Country, Company } from '@/types';
+import { formatNumber } from '@/lib/utils';
 
 type CountryAnalysis = {
   companiesCount: number;
@@ -58,7 +59,7 @@ export function CountryCard({ country, analysis }: CountryCardProps) {
             </span>
           </div>
           <span className="font-semibold text-[var(--foreground)]">
-            {analysis.totalEmissions} tCO2
+            {formatNumber(analysis.totalEmissions)} tCO2
           </span>
         </div>
 

@@ -6,8 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Calendar, Building2, ArrowLeft } from 'lucide-react';
 import { Icon } from '@/components/ui/icon';
-import { useReportDetail } from '@/hooks/useReportDetail';
-import { useCompanyNameMap } from '@/hooks/useCompany';
+import { useReportDetail, useCompanyNameMap } from '@/hooks/useCompany';
 import { formatDateForDisplay } from '@/lib/utils';
 import Link from 'next/link';
 

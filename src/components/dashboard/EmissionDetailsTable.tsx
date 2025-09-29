@@ -8,6 +8,7 @@ import {
   TableRow,
   TableCell,
 } from '@/components/ui/table';
+import { formatNumber, formatPercentage } from '@/lib/utils';
 
 type EmissionRecord = {
   yearMonth: string;
@@ -61,10 +62,10 @@ export function EmissionDetailsTable({
                     {sourceNames[emission.source] || emission.source}
                   </TableCell>
                   <TableCell className="text-right font-medium">
-                    {emission.emissions} tCO2
+                    {formatNumber(emission.emissions)} tCO2
                   </TableCell>
                   <TableCell className="text-center text-[var(--foreground)]/60">
-                    {percentage.toFixed(1)}%
+                    {formatPercentage(percentage, 1)}
                   </TableCell>
                   <TableCell className="text-center">
                     <Badge

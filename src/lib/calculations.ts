@@ -4,6 +4,7 @@ import type {
   EmissionBySource,
   MonthlyTrendData,
 } from '@/types';
+import { formatNumber, formatPercentage } from '@/lib/utils';
 
 export function calculateKPIs(company: Company): KPIData {
   if (!company.emissions.length) {
@@ -51,12 +52,12 @@ export function calculateKPIs(company: Company): KPIData {
   const mainSourceEmissions = mainSourceEntry?.[1] || 0;
   const sourcePercentage =
     totalEmissions > 0
-      ? `${((mainSourceEmissions / totalEmissions) * 100).toFixed(1)}% 비중`
+      ? `${formatPercentage((mainSourceEmissions / totalEmissions) * 100, 1)} 비중`
       : '0% 비중';
 
   return {
-    totalEmissions: `${totalEmissions} tCO2`,
-    currentMonth: `${currentMonthEmissions} tCO2`,
+    totalEmissions: `${formatNumber(totalEmissions)} tCO2`,
+    currentMonth: `${formatNumber(currentMonthEmissions)} tCO2`,
     monthlyTrend,
     targetAchievement,
     mainSource,
