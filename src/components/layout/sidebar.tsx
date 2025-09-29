@@ -1,20 +1,11 @@
-import {
-  Home,
-  Building2,
-  BarChart3,
-  FileText,
-  Settings,
-  Leaf,
-} from 'lucide-react';
+import { Home, FileText, Globe, Leaf } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Icon } from '@/components/ui/icon';
 
 const navigation = [
   { name: '대시보드', href: '/', icon: Home, current: true },
-  { name: '회사관리', href: '/companies', icon: Building2, current: false },
-  { name: '배출데이터', href: '/emissions', icon: BarChart3, current: false },
   { name: '보고서', href: '/reports', icon: FileText, current: false },
-  { name: '시스템관리', href: '/settings', icon: Settings, current: false },
+  { name: '국가별 분석', href: '/countries', icon: Globe, current: false },
 ];
 
 export function Sidebar() {
