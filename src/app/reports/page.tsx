@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { getQueryClient } from '@/lib/queryClient';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { fetchPosts, fetchCompanies } from '@/lib/api';
-import ReportsContent from './reports-content';
+import ReportsContent from './ReportsContent';
 import { DashboardLoading } from '@/components/ui/loading';
 import { ErrorBoundary } from '@/components/ui/errorBoundary';
 
