@@ -23,3 +23,16 @@ export function formatCurrency(
 export function formatPercentage(value: number, decimals = 2): string {
   return `${value.toFixed(decimals)}%`;
 }
+
+export function formatDate(date: Date = new Date()): string {
+  return date.toISOString().split('T')[0];
+}
+
+export function formatDateForDisplay(dateString: string): string {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}

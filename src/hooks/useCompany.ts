@@ -1,5 +1,15 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import { fetchCompanies, fetchCountries, fetchPosts } from '@/lib/api';
+import {
+  useQuery,
+  useSuspenseQuery,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
+import {
+  fetchCompanies,
+  fetchCountries,
+  fetchPosts,
+  createOrUpdatePost,
+} from '@/lib/api';
 import {
   calculateKPIs,
   calculateEmissionBySource,
@@ -61,5 +71,16 @@ export function usePosts() {
   return useSuspenseQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
+  });
+}
+
+export function useCreateOrUpdatePost() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createOrUpdatePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
   });
 }
