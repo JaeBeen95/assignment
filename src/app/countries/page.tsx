@@ -1,24 +1,30 @@
 import { Suspense } from 'react';
 import { getQueryClient } from '@/lib/queryClient';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { fetchCompanies } from '@/lib/api';
-import Dashboard from '@/components/dashboard/Dashboard';
+import { fetchCountries, fetchCompanies } from '@/lib/api';
+import CountriesContent from './CountriesContent';
 import { DashboardLoading } from '@/components/ui/loading';
 import { ErrorBoundary } from '@/components/ui/errorBoundary';
 
-export default async function Home() {
+export default async function CountriesPage() {
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ['companies'],
-    queryFn: fetchCompanies,
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ['countries'],
+      queryFn: fetchCountries,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['companies'],
+      queryFn: fetchCompanies,
+    }),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ErrorBoundary>
         <Suspense fallback={<DashboardLoading />}>
-          <Dashboard />
+          <CountriesContent />
         </Suspense>
       </ErrorBoundary>
     </HydrationBoundary>

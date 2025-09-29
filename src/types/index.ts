@@ -23,3 +23,26 @@ export type Country = {
   code: string;
   name: string;
 };
+
+// Dashboard calculation types
+export interface KPIData {
+  totalEmissions: string;
+  currentMonth: string;
+  monthlyTrend: string;
+  targetAchievement: string;
+  mainSource: string;
+  sourcePercentage: string;
+}
+
+export interface EmissionBySource {
+  labels: string[];
+  values: number[];
+}
+
+export interface MonthlyTrendData {
+  labels: string[];
+  datasets: Array<{
+    label: string;
+    data: number[];
+  }>;
+}
