@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 탄소 배출량 관리 대시보드
 
-## Getting Started
+**총 개발 시간: 21시간**
 
-First, run the development server:
+- 도메인 분석: 2h
+- 디자인 분석: 3h
+- Next.js App Router 학습: 5h
+- 코드 작성: 11h
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 주요 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **회사 전환 시스템**: Header 드롭다운을 통해 회사별 대시보드 전환
+- **KPI 카드**: 총 배출량, 월별 배출량 등의 지표 요약
+- **데이터 시각화**: Chart.js 기반 도넛/라인 차트
+- **상세 데이터 테이블**: 배출 내역 상세 분석
+- **국가별 데이터**: 국가 단위 배출량과 소속 회사 정보
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 아키텍처 및 상태 관리
 
-To learn more about Next.js, take a look at the following resources:
+- **TanStack Query**: 서버 상태 관리 (API 데이터, 캐싱, 동기화, 에러 처리)
+- **React Context API**: 클라이언트 상태 관리 (선택된 회사, UI 상태)
+- **React Suspense/ErrorBoundary**: 선언적 비동기 UI → 로딩/에러 처리 단순화
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+데이터 흐름 요약:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. 서버 컴포넌트에서 `HydrationBoundary`로 초기 데이터 프리페칭
+2. 클라이언트 컴포넌트에서 `useSuspenseQuery`로 데이터 조회
+3. Context API로 회사 선택 상태 전파
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 디자인 시스템
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 화려함보다 데이터 전달에 집중
+- Material Design - Data visualization, IBM Design Language 등을 참고 자료로 함
+
+### 색상 시스템
+
+- **OKLCH**: 최신 CSS 색상 모델, 직관적 제어 & 색약 사용자 접근성 향상
+- **Primary**: 신뢰감을 주는 파란색 → 버튼/핵심 상호작용에 제한적 사용
+- **Semantic**: 빨강, 초록 → 증감 즉시 인지 가능
+- **Chart Colors**: 데이터 계열 간 혼동 최소화
+- **Neutral**: 은은한 회색 배경 + 짙은 남색 전경 → 장시간 사용에도 눈 피로 감소
+
+### 타이포그래피
+
+- **Inter 폰트**: 숫자·영문 가독성 우수
+- **Fallback 스택**: OS 기본 서체 → 환경 간 일관된 경험 보장
+
+### 컴포넌트
+
+- **Card Shadow**: 은은한 그림자로 정보 구획
+- **Card Radius (8px)**: 부드럽고 현대적인 인상, 일관성 강화
+
+---
+
+## 기술 스택
+
+- **Core**: Next.js 14 (App Router), React 18, TypeScript
+- **State**: TanStack Query v5, React Context API
+- **UI**: Tailwind CSS v4, shadcn/ui 패턴, Lucide React, Chart.js
+- **Code Quality**: ESLint (Airbnb-TS), Prettier, Husky, lint-staged
