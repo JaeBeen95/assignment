@@ -1,5 +1,7 @@
 # 탄소 배출량 관리 대시보드
 
+**배포 주소: https://hanaloop-assignment-rose.vercel.app/**
+
 **총 개발 시간: 21시간**
 
 - 도메인 분석: 2h
